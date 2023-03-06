@@ -1,0 +1,2 @@
+PORT=3000
+DATABASE=postgres://ilyaignatov:123@localhost:5432/sigame
