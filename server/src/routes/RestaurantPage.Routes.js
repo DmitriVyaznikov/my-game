@@ -3,24 +3,22 @@ const express = require("express");
 const router = express.Router();
 
 const {
-  Restaurant,
-  Review,
-  ReviewDelete,
-  NewReview,
-  EditRestaurant,
-  EditRestaurantPage,
-} = require("../controllers/restController");
+  GameBeforeStart,
+} = require("../controllers/gameController");
 
-router.get("/:restId", Restaurant);
+router.get("/:userId", GameBeforeStart);
 
-router.get("/reviews/:restId", Review);
+router.get("/:userId/attempt/:gameId", GameMain);
 
-router.get("/edit/:restId", EditRestaurantPage);
 
-router.put("/edit", EditRestaurant);
+router.post("/new", CreateNewGame);
 
-router.post("/reviews/new", NewReview);
+router.post("/answer", AnswerOnQuestion);
 
-router.delete("/review", ReviewDelete);
+
+
+// router.post("/reviews/new", NewReview);
+//
+// router.delete("/review", ReviewDelete);
 
 module.exports = router;
