@@ -1,12 +1,12 @@
 import React from 'react';
-import styles from './main.module.css'
+import style from './style.module.css';
 
 function Main(props) {
-    return (
-        <h1 className={styles.Main}>
-            Main1
-        </h1>
-    );
+  return (
+    <div className={style.mainPage}>
+      <h1 className={style.Main}>СВОЯ ИГРА</h1>
+    </div>
+  );
 }
 
 export default Main;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { AppBar, Toolbar, Typography, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import ModalWin from '../Modal/ModalWin';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const CustomNavbar = styled(AppBar)({
   backgroundColor: '#2196f3', // your custom background color
@@ -59,6 +59,15 @@ const Navbar = (props) => {
           </Typography>
           {isAuth ? (
             <>
+              <CustomButton
+                id="home"
+                onClick={() => {
+                  navigate('/');
+                }}
+                color="inherit"
+              >
+                Home
+              </CustomButton>
               <CustomButton
                 id="profile"
                 // onClick={handleModal}
