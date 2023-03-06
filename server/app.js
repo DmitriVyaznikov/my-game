@@ -16,9 +16,8 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
-const MainRoutes = require('./src/routes/Main.Routes');
-const RestPage = require('./src/routes/RestaurantPage.Routes');
-const GamePage = require('./src/routes/RestaurantPage.Routes');
+
+const GamePage = require('./src/routes/GamePage.Routes');
 const AuthRoutes = require('./src/routes/auth.Routes');
 
 app.use(express.urlencoded({ extended: true }));
@@ -58,9 +57,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/', MainRoutes);
 app.use('/auth', AuthRoutes);
-app.use('/rest', RestPage);
+
 app.use('/game', GamePage);
 
 app.use((req, res, next) => {

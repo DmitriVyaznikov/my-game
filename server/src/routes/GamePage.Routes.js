@@ -3,22 +3,17 @@ const express = require("express");
 const router = express.Router();
 
 const {
-  GameBeforeStart, GameMain,
+    GameBeforeStart, GameMain, NewGame, Personal
 } = require("../controllers/gameController");
 
 router.get("/:userId", GameBeforeStart);
 
 router.get("/:userId/attempt/:gameId", GameMain);
 
+router.get('/:userId/personal', Personal)
 
-// router.post("/new", CreateNewGame);
-//
-// router.post("/answer", AnswerOnQuestion);
-
+router.post('/new', NewGame)
 
 
-// router.post("/reviews/new", NewReview);
-//
-// router.delete("/review", ReviewDelete);
 
 module.exports = router;
