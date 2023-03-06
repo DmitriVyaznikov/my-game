@@ -9,7 +9,7 @@ module.exports = {
         {
           userId: 1,
           gameId: 1,
-          correctQuestion: true,
+          correctQuestion: null,
           questionId: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -25,7 +25,7 @@ module.exports = {
         {
           userId: 1,
           gameId: 1,
-          correctQuestion: true,
+          correctQuestion: null,
           questionId: 3,
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -33,7 +33,7 @@ module.exports = {
         {
           userId: 1,
           gameId: 1,
-          correctQuestion: true,
+          correctQuestion: null,
           questionId: 4,
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -57,7 +57,7 @@ module.exports = {
         {
           userId: 1,
           gameId: 1,
-          correctQuestion: true,
+          correctQuestion: false,
           questionId: 7,
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -73,7 +73,7 @@ module.exports = {
         {
           userId: 1,
           gameId: 1,
-          correctQuestion: true,
+          correctQuestion: false,
           questionId: 9,
           createdAt: new Date(),
           updatedAt: new Date(),
