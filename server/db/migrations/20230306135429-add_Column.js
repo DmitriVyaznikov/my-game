@@ -11,7 +11,7 @@ module.exports = {
             onUpdate: 'CASCADE',
             onDelete: 'CASCADE'
         });
-        await queryInterface.removeColumn('Questions', 'themeName')
+        // await queryInterface.removeColumn('Questions', 'themeName')
 
     },
 
