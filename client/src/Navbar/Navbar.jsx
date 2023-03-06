@@ -10,7 +10,7 @@ const CustomButton = styled(Button)({
     color: 'white', // your custom text color
 });
 
-const Navbar = () => {
+const Navbar = (props) => {
     return (
         <CustomNavbar position="static">
             <Toolbar>

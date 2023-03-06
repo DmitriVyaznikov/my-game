@@ -40,7 +40,7 @@ exports.createUserAndSession = async (req, res, next) => {
     if (username.length < 4) {
       return res
         .status(400)
-        .send({ error: "Login must be at least 4 characters long" });
+        .send({ error: "Register must be at least 4 characters long" });
     }
 
     // Password validation
