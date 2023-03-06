@@ -2,6 +2,11 @@ import ATypes from "./types";
 
 const initialState = {
   topics: [],
+  user: {
+    userId: null,
+    username: "",
+    gameId: null,
+  },
 };
 
 export const reducers = (state = initialState, action) => {
