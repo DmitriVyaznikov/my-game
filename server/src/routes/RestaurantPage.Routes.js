@@ -1,21 +1,16 @@
-const express = require("express");
+const express = require('express');
 
 const router = express.Router();
 
-const {
-  GameBeforeStart,
-} = require("../controllers/gameController");
+const { GameBeforeStart } = require('../controllers/gameController');
 
-router.get("/:userId", GameBeforeStart);
+router.get('/:userId', GameBeforeStart);
 
-router.get("/:userId/attempt/:gameId", GameMain);
+// router.get("/:userId/attempt/:gameId", GameMain);
 
+// router.post('/new', CreateNewGame);
 
-router.post("/new", CreateNewGame);
-
-router.post("/answer", AnswerOnQuestion);
-
-
+// router.post('/answer', AnswerOnQuestion);
 
 // router.post("/reviews/new", NewReview);
 //
