@@ -3,8 +3,8 @@ exports.isAuth = (req, res, next) => {
 };
 
 exports.isValid = (req, res, next) => {
-  const { username, password, email } = req.body;
-  if (username && password && email) {
+  const { login, password, email } = req.body;
+  if (login && password && email) {
     next();
   } else res.status(401).json({ err: "Field can't be empty" });
 };

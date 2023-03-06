@@ -10,11 +10,6 @@ const ModalWin = ({
   setSignUpModal,
   setSignInModal,
 }) => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Do something with login credentials
-  };
-
   const onClose = (event) => {
     if (event.target) setSignUpModal(false);
     if (event.target) setSignInModal(false);
@@ -42,8 +37,8 @@ const ModalWin = ({
           borderRadius: '8px',
         }}
       >
-        {signInModal && <Login />}
-        {signUpModal && <Register />}
+        {signInModal && <Login setSignInModal={setSignInModal} />}
+        {signUpModal && <Register setSignUpModal={setSignUpModal} />}
       </Box>
     </Modal>
   );

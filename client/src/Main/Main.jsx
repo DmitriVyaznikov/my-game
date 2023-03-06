@@ -26,7 +26,10 @@ function Main() {
     <>
       <div className={styles.mainBox}>
         {topics.map((topic) => (
-          <Row key={topic.id} topic={topic} />
+          <Row
+            key={topic.id}
+            topic={topic}
+          />
         ))}
       </div>
     </>
