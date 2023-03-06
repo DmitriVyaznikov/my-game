@@ -1,11 +1,13 @@
 import ATypes from "./types";
 
+const user = JSON.parse(localStorage.getItem("user")) || {};
+
 const initialState = {
   topics: [],
   user: {
-    userId: null,
-    username: "",
-    gameId: null,
+    userId: user.id,
+    username: user.login,
+    gameId: 1,
   },
 };
 
@@ -16,6 +18,16 @@ export const reducers = (state = initialState, action) => {
         ...state,
         topics: action.payload.topics,
       };
+      case ATypes.SET_USER:
+        return {
+          ...state,
+          user: {
+            ...state.user,
+            username: action.payload.user.username,
+            userId: action.payload.user.userId,
+          },
+        };
+
 
     default:
       return state; // возвращаем зн-я в память. return - записывает новые значения в стор (храниться все в памяти память)

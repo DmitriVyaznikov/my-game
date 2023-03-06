@@ -12,7 +12,7 @@ function Main() {
       <h1>СВОЯ ИГРА</h1>
       {userName ? (
         <button
-          onClick={() => navigate('/')}
+          onClick={() => navigate('/game')}
           className={style.button}
         >
           {' '}

@@ -3,6 +3,7 @@ import { AppBar, Toolbar, Typography, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import ModalWin from '../Modal/ModalWin';
 import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const CustomNavbar = styled(AppBar)({
   backgroundColor: '#2196f3', // your custom background color
@@ -13,6 +14,8 @@ const CustomButton = styled(Button)({
 });
 
 const Navbar = (props) => {
+  const userName = useSelector((store) => store.user.username);
+
   const navigate = useNavigate();
 
   const [signUpModal, setSignUpModal] = useState(false);
@@ -25,7 +28,6 @@ const Navbar = (props) => {
 
   const [isAuth, setIsAuth] = useState(false);
 
-  const userName = JSON.parse(localStorage.getItem('user'));
   useEffect(() => {
     setIsAuth(!!userName);
   }, [userName]);
@@ -73,7 +75,7 @@ const Navbar = (props) => {
                 // onClick={handleModal}
                 color="inherit"
               >
-                Hello, {userName.login}
+                Hello, {userName}
               </CustomButton>
               <CustomButton
                 id="logout"

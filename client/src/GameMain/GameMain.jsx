@@ -1,6 +1,7 @@
 import { light } from "@mui/material/styles/createPalette";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Row } from "../Row/Row";
 import { setTopics } from "../store/actions";
 import styles from "./gameMain.module.css";
@@ -11,9 +12,11 @@ export function GameMain() {
 
   const dispatch = useDispatch();
 
+  const navigate = useNavigate();
+
   const getTopics = async (user) => {
     const response = await fetch(
-      `http://localhost:3003/${user.userId}/attempt/${user.gameId}`
+      `http://localhost:4004/${user.userId}/attempt/${user.gameId}`
     );
 
     const result = await response.json();
@@ -24,6 +27,10 @@ export function GameMain() {
   useEffect(() => {
     getTopics(user);
   }, []);
+
+  if (!user.gameId) {
+    navigate("/");
+  }
 
   return (
     <>
