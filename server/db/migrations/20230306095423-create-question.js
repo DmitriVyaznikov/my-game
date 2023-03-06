@@ -11,6 +11,7 @@ module.exports = {
       },
       questionText: {
         type: Sequelize.TEXT,
+        allowNull: false,
       },
       points: {
         type: Sequelize.INTEGER,
