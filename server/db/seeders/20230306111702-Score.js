@@ -1,0 +1,143 @@
+'use strict';
+
+/** @type {import('sequelize-cli').Migration} */
+module.exports = {
+  async up(queryInterface, Sequelize) {
+    await queryInterface.bulkInsert(
+      'Scores',
+      [
+        {
+          userId: 1,
+          gameId: 1,
+          correctQuestion: true,
+          questionId: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          userId: 1,
+          gameId: 1,
+          correctQuestion: true,
+          questionId: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          userId: 1,
+          gameId: 1,
+          correctQuestion: true,
+          questionId: 3,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          userId: 1,
+          gameId: 1,
+          correctQuestion: true,
+          questionId: 4,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          userId: 1,
+          gameId: 1,
+          correctQuestion: true,
+          questionId: 5,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          userId: 1,
+          gameId: 1,
+          correctQuestion: true,
+          questionId: 6,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          userId: 1,
+          gameId: 1,
+          correctQuestion: true,
+          questionId: 7,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          userId: 1,
+          gameId: 1,
+          correctQuestion: true,
+          questionId: 8,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          userId: 1,
+          gameId: 1,
+          correctQuestion: true,
+          questionId: 9,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          userId: 1,
+          gameId: 1,
+          correctQuestion: true,
+          questionId: 10,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          userId: 1,
+          gameId: 1,
+          correctQuestion: true,
+          questionId: 11,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          userId: 1,
+          gameId: 1,
+          correctQuestion: true,
+          questionId: 12,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          userId: 1,
+          gameId: 1,
+          correctQuestion: true,
+          questionId: 13,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          userId: 1,
+          gameId: 1,
+          correctQuestion: true,
+          questionId: 14,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          userId: 1,
+          gameId: 1,
+          correctQuestion: true,
+          questionId: 15,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          userId: 1,
+          gameId: 1,
+          correctQuestion: true,
+          questionId: 16,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      {}
+    );
+  },
+
+  async down(queryInterface, Sequelize) {},
+};
