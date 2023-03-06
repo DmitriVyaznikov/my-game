@@ -3,21 +3,25 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Login from './Login/Login';
 import Register from './Register/Register';
+import { Question } from './Question/Question';
 
 const ModalWin = ({
   signInModal,
   signUpModal,
+  questionModal,
   setSignUpModal,
   setSignInModal,
+  setQuestionModal,
 }) => {
   const onClose = (event) => {
     if (event.target) setSignUpModal(false);
     if (event.target) setSignInModal(false);
+    if (event.target) setQuestionModal(true);
   };
 
   return (
     <Modal
-      open={signUpModal || signInModal} //isOpen
+      open={signUpModal || signInModal || questionModal} //isOpen
       onClose={onClose}
       aria-labelledby="login-modal-title"
       aria-describedby="login-modal-description"
@@ -39,6 +43,7 @@ const ModalWin = ({
       >
         {signInModal && <Login setSignInModal={setSignInModal} />}
         {signUpModal && <Register setSignUpModal={setSignUpModal} />}
+        {questionModal && <Question setQuestionModal={setQuestionModal} />}
       </Box>
     </Modal>
   );

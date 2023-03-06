@@ -20,6 +20,7 @@ const Navbar = (props) => {
 
   const [signUpModal, setSignUpModal] = useState(false);
   const [signInModal, setSignInModal] = useState(false);
+  const [questionModal, setQuestionModal] = useState(true);
 
   const handleModal = (event) => {
     if (event.target.id === 'signin') setSignInModal(true);
@@ -72,7 +73,9 @@ const Navbar = (props) => {
               </CustomButton>
               <CustomButton
                 id="profile"
-                // onClick={handleModal}
+                onClick={() => {
+                  navigate('/profile');
+                }}
                 color="inherit"
               >
                 Hello, {userName}
@@ -108,8 +111,10 @@ const Navbar = (props) => {
       <ModalWin
         signUpModal={signUpModal}
         signInModal={signInModal}
+        questionModal={questionModal}
         setSignUpModal={setSignUpModal}
         setSignInModal={setSignInModal}
+        setQuestionModal={setQuestionModal}
       />
     </>
   );
