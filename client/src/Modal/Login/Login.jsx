@@ -4,7 +4,7 @@ import { Typography } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
-function Login() {
+function Login({ setSignInModal }) {
   const [user, setUser] = useState({});
   const onChangeHandle = (event) => {
     setUser({ ...user, [event.target.name]: event.target.value });
@@ -15,14 +15,22 @@ function Login() {
   const signIn = async (event) => {
     event.preventDefault();
     try {
+      console.log(user);
       const response = await fetch('http://localhost:4000/auth/signin', {
         method: 'POST',
-        headers: { 'Content-Type': 'application-json' },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(user),
         credentials: 'include',
       });
       const result = await response.json();
-      navigate('/');
+      if (result.status === 200) {
+        localStorage.setItem(
+          'user',
+          JSON.stringify({ login: result.reqUser.name, id: result.reqUser.id })
+        );
+        setSignInModal(false);
+        navigate('/');
+      }
     } catch (error) {
       console.error(error);
     }

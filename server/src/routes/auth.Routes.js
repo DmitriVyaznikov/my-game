@@ -1,5 +1,5 @@
-const express = require("express");
-const { isAuth, isValid } = require("../middlewares/common");
+const express = require('express');
+const { isAuth, isValid } = require('../middlewares/common');
 
 const router = express.Router();
 
@@ -7,12 +7,12 @@ const {
   checkUserAndCreateSession,
   createUserAndSession,
   destroySession,
-} = require("../controllers/authControllers");
+} = require('../controllers/authControllers');
 
-router.route("/signin").post(checkUserAndCreateSession); // Аутентификация пользователя
+router.route('/signin').post(checkUserAndCreateSession); // Аутентификация пользователя
 
-router.route("/signup").post(isValid, createUserAndSession); // Регистрация пользователя
+router.route('/signup').post(isValid, createUserAndSession); // Регистрация пользователя
 
-router.get("/signout", destroySession);
+router.get('/signout', destroySession);
 
 module.exports = router;

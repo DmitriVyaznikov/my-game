@@ -10,19 +10,20 @@ const { User } = require('../../db/models');
 
 const failAuth = (res, err) => res.status(401).json({ err });
 
-exports.checkUserAndCreateSession = async (req, res, next) => {
+exports.checkUserAndCreateSession = async (req, res) => {
   try {
-    const { username, password } = req.body;
-    const user = await User.findOne({ where: { username }, raw: true });
+    const { login, password } = req.body;
+    const user = await User.findOne({ where: { login }, raw: true });
 
     if (!user) return failAuth(res, 'Неправильное имя/пароль');
 
     const isValidPassword = await bcrypt.compare(password, user.password);
     if (!isValidPassword) return failAuth(res, 'Неправильное имя/пароль');
 
-    req.session.user = { id: user.id, name: user.username };
+    req.session.user = { id: user.id, name: user.login };
+    const reqUser = req.session.user;
     console.log('Session Success');
-    res.json(req.session.user);
+    res.json({ status: 200, reqUser });
   } catch (err) {
     console.error('Err message:', err.message);
     console.error('Err code', err.code);
@@ -37,7 +38,7 @@ exports.createUserAndSession = async (req, res, next) => {
       return res.status(400).send({ error: 'Invalid login format' });
     }
 
-    if (username.length < 4) {
+    if (login.length < 4) {
       return res
         .status(400)
         .send({ error: 'Register must be at least 4 characters long' });
@@ -56,13 +57,12 @@ exports.createUserAndSession = async (req, res, next) => {
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
     const user = await User.create({
-      username,
+      login,
       password: hashedPassword,
       email,
     });
 
-    req.session.user = { id: user.id, name: user.name }; // создай куку  и запиши в БД session storage
-    res.redirect("/");
+    res.send({ status: 200, user });
   } catch (error) {
     const err = error.message;
     console.error('Err message:', err.message);
