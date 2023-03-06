@@ -1,35 +1,47 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Typography } from '@mui/material';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Typography } from "@mui/material";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import { useDispatch } from "react-redux";
+import { setUserInfo } from "../../store/actions";
 
 function Login({ setSignInModal }) {
   const [user, setUser] = useState({});
+
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
   const onChangeHandle = (event) => {
     setUser({ ...user, [event.target.name]: event.target.value });
   };
-
-  const navigate = useNavigate();
 
   const signIn = async (event) => {
     event.preventDefault();
     try {
       console.log(user);
-      const response = await fetch('http://localhost:4000/auth/signin', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("http://localhost:4004/auth/signin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(user),
-        credentials: 'include',
+        credentials: "include",
       });
       const result = await response.json();
       if (result.status === 200) {
         localStorage.setItem(
-          'user',
+          "user",
           JSON.stringify({ login: result.reqUser.name, id: result.reqUser.id })
         );
+
+        dispatch(
+          setUserInfo({
+            userId: result.reqUser.id,
+            username: result.reqUser.name,
+          })
+        );
         setSignInModal(false);
-        navigate('/');
+        navigate("/");
       }
     } catch (error) {
       console.error(error);
@@ -38,18 +50,10 @@ function Login({ setSignInModal }) {
 
   return (
     <>
-      <Typography
-        variant="h6"
-        id="login-modal-title"
-        gutterBottom
-      >
+      <Typography variant="h6" id="login-modal-title" gutterBottom>
         Вход
       </Typography>
-      <Typography
-        variant="body1"
-        id="login-modal-description"
-        gutterBottom
-      >
+      <Typography variant="body1" id="login-modal-description" gutterBottom>
         Введите имя пользователя и пароль
       </Typography>
       <form onSubmit={signIn}>
@@ -74,11 +78,7 @@ function Login({ setSignInModal }) {
           fullWidth
           required
         />
-        <Button
-          variant="contained"
-          type="submit"
-          fullWidth
-        >
+        <Button variant="contained" type="submit" fullWidth>
           Войти
         </Button>
       </form>
