@@ -14,6 +14,8 @@ module.exports = {
         references: {
           model: 'Users',
           key: 'id',
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE'
         },
       },
       gameId: {
@@ -22,6 +24,8 @@ module.exports = {
         references: {
           model: 'Games',
           key: 'id',
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE'
         },
       },
       correctQuestion: {
@@ -33,6 +37,8 @@ module.exports = {
         references: {
           model: 'Questions',
           key: 'id',
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE'
         },
       },
       createdAt: {
