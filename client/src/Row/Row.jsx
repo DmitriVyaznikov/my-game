@@ -10,7 +10,7 @@ export function Row(props) {
       <Box className={styles.themename}>{topic.name}</Box>
 
       {topic.questions.map((el) => (
-        <Box className={styles.themename} key={el.id}>{!el.answered ? el.points : "Answered"}</Box>
+        <Box className={styles.questionsrow} key={el.id}>{!el.answered ? el.points : "Answered"}</Box>
       ))}
     </Box>
   );
