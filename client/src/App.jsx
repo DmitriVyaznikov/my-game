@@ -2,7 +2,7 @@ import './App.css';
 import CustomNavbar from './Navbar/Navbar';
 import Main from './Main/Main';
 import { Route, Routes } from 'react-router-dom';
-import ModalWin from './Modal/ModalWin';
+import { useEffect, useState } from 'react';
 
 function App() {
   return (

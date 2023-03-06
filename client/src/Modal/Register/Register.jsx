@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function Register() {
+function Register({ setSignUpModal }) {
   const [user, setUser] = useState({});
   const navigate = useNavigate();
   const onChangeHandle = (event) => {
@@ -23,7 +23,14 @@ function Register() {
       });
       const result = await response.json();
       console.log(result);
-      navigate('/');
+      if (result.status === 200) {
+        localStorage.setItem(
+          'user',
+          JSON.stringify({ login: result.user.login, id: result.user.id })
+        );
+        setSignUpModal(false);
+        navigate('/');
+      }
     } catch (error) {
       console.error(error);
     }

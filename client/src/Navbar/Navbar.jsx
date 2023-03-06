@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AppBar, Toolbar, Typography, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import ModalWin from '../Modal/ModalWin';
+import { useNavigate } from 'react-router-dom';
 
 const CustomNavbar = styled(AppBar)({
   backgroundColor: '#2196f3', // your custom background color
@@ -12,12 +13,37 @@ const CustomButton = styled(Button)({
 });
 
 const Navbar = (props) => {
+  const navigate = useNavigate();
+
   const [signUpModal, setSignUpModal] = useState(false);
   const [signInModal, setSignInModal] = useState(false);
 
   const handleModal = (event) => {
     if (event.target.id === 'signin') setSignInModal(true);
     if (event.target.id === 'signup') setSignUpModal(true);
+  };
+
+  const [isAuth, setIsAuth] = useState(false);
+
+  const userName = JSON.parse(localStorage.getItem('user'));
+  useEffect(() => {
+    setIsAuth(!!userName);
+  }, [userName]);
+
+  const onLogout = async () => {
+    try {
+      const response = await fetch('http://localhost:4000/auth/signout', {
+        credentials: 'include',
+      });
+      const result = await response.json();
+      console.log(result);
+      localStorage.clear();
+      setIsAuth(false);
+      console.log('HEADER', isAuth);
+      navigate('/');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -31,20 +57,41 @@ const Navbar = (props) => {
           >
             Своя игра
           </Typography>
-          <CustomButton
-            id="signin"
-            onClick={handleModal}
-            color="inherit"
-          >
-            Вход
-          </CustomButton>
-          <CustomButton
-            id="signup"
-            onClick={handleModal}
-            color="inherit"
-          >
-            Регистрация
-          </CustomButton>
+          {isAuth ? (
+            <>
+              <CustomButton
+                id="profile"
+                // onClick={handleModal}
+                color="inherit"
+              >
+                Hello, {userName.login}
+              </CustomButton>
+              <CustomButton
+                id="logout"
+                onClick={onLogout}
+                color="inherit"
+              >
+                Выйти
+              </CustomButton>
+            </>
+          ) : (
+            <>
+              <CustomButton
+                id="signin"
+                onClick={handleModal}
+                color="inherit"
+              >
+                Вход
+              </CustomButton>
+              <CustomButton
+                id="signup"
+                onClick={handleModal}
+                color="inherit"
+              >
+                Регистрация
+              </CustomButton>
+            </>
+          )}
         </Toolbar>
       </CustomNavbar>
       <ModalWin
