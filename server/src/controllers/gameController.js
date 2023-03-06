@@ -1,29 +1,31 @@
 const express = require("express");
 
-const { Restaurant, Review } = require("../../db/models");
+const { Game } = require("../../db/models");
 
-exports.Restaurant = async (req, res) => {
+exports.GameBeforeStart = async (req, res) => {
   try {
     const userid = req.session?.user?.id;
     const username = req.session?.user?.name;
-    const { restId } = req.params;
+    const { userId } = req.params;
 
-    const response = await Restaurant.findOne({ where: { id: restId } });
+    const newGame = await Game.create({userId}  );
 
-    res.json(response);
+    const userLastGame = await Game.findAll({where: {userId}, order: [["createdAt", "DESC"]], limit: 1})
+
+
+    res.json({newGame, userLastGame});
   } catch (e) {
     console.error(e);
   }
 };
 
-exports.EditRestaurantPage = async (req, res) => {
+exports.GameMain = async (req, res) => {
   try {
     const userid = req.session?.user?.id;
     const username = req.session?.user?.name;
-    const { restId } = req.params;
-    console.log("-> req.params", req.params);
+    const { userId, gameId } = req.params;
 
-    const response = await Restaurant.findOne({ where: { id: restId } });
+    const questions = await Question.findAll({ where: { id: restId } });
 
     res.json(response);
   } catch (e) {
