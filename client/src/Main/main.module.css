@@ -1,5 +1,7 @@
 .Main {
+  text-align: center;
+}
 
-    text-align: center;
-
+.mainBox {
+  padding: 50px 124px;
 }

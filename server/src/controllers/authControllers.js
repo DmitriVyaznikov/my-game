@@ -61,7 +61,8 @@ exports.createUserAndSession = async (req, res, next) => {
       email,
     });
 
-    res.send(200).end();
+    req.session.user = { id: user.id, name: user.name }; // создай куку  и запиши в БД session storage
+    res.redirect("/");
   } catch (error) {
     const err = error.message;
     console.error("Err message:", err.message);

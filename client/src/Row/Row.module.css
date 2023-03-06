@@ -1,0 +1,21 @@
+.rowBox {
+  display: flex;
+  align-items: center;
+}
+
+.themename {
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-size: 1.25rem;
+  color: white;
+  line-height: 1.6;
+  letter-spacing: 0.0075em;
+  border: 1px solid black;
+  border-radius: 10px;
+}

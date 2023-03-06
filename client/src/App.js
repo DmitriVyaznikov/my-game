@@ -8,9 +8,9 @@ function App() {
   return (
       <>
           <CustomNavbar/>
-          <ModalWin/>
+          {/* <ModalWin/> */}
           <Routes>
-              <Route path="/" element={<Main />} />
+              <Route path="/main" element={<Main />} />
               <Route
                   path="/personal"
                   element={<div>personal</div>}
