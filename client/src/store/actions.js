@@ -12,5 +12,15 @@ export const setUserInfo = (user) => ({
 
 export const setAnswers = (userId, gameId, correctQuestion, questionId) => ({
   type: ATypes.SET_ANSWERS,
-  payload: { userId: userId, gameId: gameId, correctQuestion: correctQuestion, questionId: questionId },
+  payload: {
+    userId: userId,
+    gameId: gameId,
+    correctQuestion: correctQuestion,
+    questionId: questionId,
+  },
+});
+
+export const setGames = (games) => ({
+  type: ATypes.SET_GAMES,
+  payload: { games: games },
 });

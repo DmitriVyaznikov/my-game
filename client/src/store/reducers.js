@@ -9,7 +9,8 @@ const initialState = {
         username: user.login,
         gameId: 1,
     },
-    answers: []
+    answers: [],
+    games: []
 };
 
 export const reducers = (state = initialState, action) => {
@@ -37,7 +38,11 @@ export const reducers = (state = initialState, action) => {
                     userId: action.payload.user.userId,
                 },
             };
-
+            case ATypes.SET_GAMES:
+              return {
+                  ...state,
+                  games: action.payload.games,
+              };
 
         default:
             return state; // возвращаем зн-я в память. return - записывает новые значения в стор (храниться все в памяти память)
