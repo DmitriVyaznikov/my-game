@@ -9,11 +9,11 @@ import style from './style.module.css';
 import { logout } from '../store/actions';
 
 const CustomNavbar = styled(AppBar)({
-  backgroundColor: '#2196f3', // your custom background color
+    backgroundColor: '#2196f3', // your custom background color
 });
 
 const CustomButton = styled(Button)({
-  color: 'white', // your custom text color
+    color: 'white', // your custom text color
 });
 
 const Navbar = (props) => {
@@ -23,21 +23,20 @@ const Navbar = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [signUpModal, setSignUpModal] = useState(false);
-  const [signInModal, setSignInModal] = useState(false);
+    const [signUpModal, setSignUpModal] = useState(false);
+    const [signInModal, setSignInModal] = useState(false);
+    const [questionModal, setQuestionModal] = useState(false);
 
   const handleModal = (event) => {
     if (event.target.id === 'signin') setSignInModal(true);
     if (event.target.id === 'signup') setSignUpModal(true);
   };
 
-  const [isAuth, setIsAuth] = useState(false);
-  console.log('FalseIsAuth', isAuth);
+    const [isAuth, setIsAuth] = useState(false);
 
-  useEffect(() => {
-    setIsAuth(!!userName);
-    console.log('State UserName', userName);
-  }, [userName]);
+    useEffect(() => {
+        setIsAuth(!!userName);
+    }, [userName]);
 
   console.log('ChangedIsAuth', isAuth);
 
@@ -92,51 +91,53 @@ const Navbar = (props) => {
                 Home
               </CustomButton>
 
-              <CustomButton
-                id="profile"
-                onClick={() => {
-                  navigate('/personal');
-                }}
-                color="inherit"
-              >
-                Profile
-              </CustomButton>
-              <CustomButton
-                id="logout"
-                onClick={onLogout}
-                color="inherit"
-              >
-                Выйти
-              </CustomButton>
-            </>
-          ) : (
-            <>
-              <CustomButton
-                id="signin"
-                onClick={handleModal}
-                color="inherit"
-              >
-                Вход
-              </CustomButton>
-              <CustomButton
-                id="signup"
-                onClick={handleModal}
-                color="inherit"
-              >
-                Регистрация
-              </CustomButton>
-            </>
-          )}
-        </Toolbar>
-      </CustomNavbar>
-      <ModalWin
-        signUpModal={signUpModal}
-        signInModal={signInModal}
-        setSignUpModal={setSignUpModal}
-        setSignInModal={setSignInModal}
-      />
-    </>
-  );
+                            <CustomButton
+                                id="profile"
+                                onClick={() => {
+                                    navigate('/personal');
+                                }}
+                                color="inherit"
+                            >
+                                Profile
+                            </CustomButton>
+                            <CustomButton
+                                id="logout"
+                                onClick={onLogout}
+                                color="inherit"
+                            >
+                                Выйти
+                            </CustomButton>
+                        </>
+                    ) : (
+                        <>
+                            <CustomButton
+                                id="signin"
+                                onClick={handleModal}
+                                color="inherit"
+                            >
+                                Вход
+                            </CustomButton>
+                            <CustomButton
+                                id="signup"
+                                onClick={handleModal}
+                                color="inherit"
+                            >
+                                Регистрация
+                            </CustomButton>
+                        </>
+                    )}
+                </Toolbar>
+            </CustomNavbar>
+            <ModalWin
+                signUpModal={signUpModal}
+                signInModal={signInModal}
+                questionModal={questionModal}
+                setSignUpModal={setSignUpModal}
+                setSignInModal={setSignInModal}
+                setQuestionModal={setQuestionModal}
+            />
+        </>
+    );
 };
 
 export default Navbar;

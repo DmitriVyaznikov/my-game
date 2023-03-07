@@ -7,7 +7,7 @@ export function mappedQuestions(arr) {
         id: item.id,
         question: item.questionText,
         points: item.points,
-        answered: false,
+        answered: null,
       })),
     };
     return result;
