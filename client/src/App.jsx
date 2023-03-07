@@ -7,14 +7,12 @@ import { GameMain } from './GameMain/GameMain';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setUserInfo } from './store/actions';
+import { Personal } from './Personal/Personal';
 
 function App() {
   const [questionModal, setQuestionModal] = useState(false);
-  const [question, setQuestion] = useState({})
-    console.log("-> question", question);
-
-
-
+  const [question, setQuestion] = useState({});
+  console.log('-> question', question);
 
   return (
     <>
@@ -31,12 +29,17 @@ function App() {
         />
         <Route
           path="/personal"
-          element={<div>personal</div>}
+          element={<Personal />}
         />
         {/* <Route path="/game" element={<div>Game with Start button</div>}></Route> */}
         <Route
           path="/game"
-          element={<GameMain setQuestionModal={setQuestionModal} setQuestion={setQuestion}/>}
+          element={
+            <GameMain
+              setQuestionModal={setQuestionModal}
+              setQuestion={setQuestion}
+            />
+          }
         ></Route>
         <Route
           path="/game/:id"

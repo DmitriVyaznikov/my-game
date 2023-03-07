@@ -46,7 +46,13 @@ const Navbar = (props) => {
         credentials: 'include',
       });
       const result = await response.json();
-      dispatch(logout());
+      localStorage.clear();
+      dispatch(
+        logout({
+          userId: null,
+          username: null,
+        })
+      );
       setIsAuth(false);
       console.log('HEADER', isAuth);
       navigate('/');

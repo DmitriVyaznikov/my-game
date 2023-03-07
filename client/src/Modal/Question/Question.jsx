@@ -6,6 +6,7 @@ import { Timer } from './Timer';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAnswers, setTopics } from '../../store/actions';
 import { useParams } from 'react-router-dom';
+import style from './style.module.css';
 
 export const Question = ({ question }) => {
   const params = useParams();
@@ -97,6 +98,7 @@ export const Question = ({ question }) => {
           <Timer />
         </div>
         <Button
+          className={style.answerButton}
           variant="contained"
           type="submit"
           fullWidth
