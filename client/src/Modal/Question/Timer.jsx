@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import style from './style.module.css';
+import style from './module.style.css';
 
-export const Timer = () => {
-  const [timer, setTimer] = useState(30);
+export const Timer = ({setTimerState}) => {
+  const [timer, setTimer] = useState(15);
 
   useEffect(() => {
     let counter;
+    if (timer === 0) {
+      setTimerState(false)
+    }
     if (timer > 0) {
       counter = setInterval(() => {
         setTimer(timer - 1);

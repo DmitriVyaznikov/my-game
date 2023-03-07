@@ -6,8 +6,9 @@ import {Row} from '../Row/Row';
 import {setTopics} from '../store/actions';
 import {mappedQuestions} from '../Utils/topics';
 import styles from './gameMain.module.css';
+import Button from "@mui/material/Button";
 
-export function GameMain({setQuestionModal, setQuestion}) {
+export function GameMain({setQuestionModal, setQuestion, addStats}) {
     const topics = useSelector((store) => store.topics);
 
     const user = useSelector((store) => store.user);
@@ -34,6 +35,10 @@ export function GameMain({setQuestionModal, setQuestion}) {
         getTopics(user);
     }, []);
 
+
+
+
+
     // console.log("-> getTopics(user);", getTopics(user));
 
     if (!user.gameId) {
@@ -47,10 +52,19 @@ export function GameMain({setQuestionModal, setQuestion}) {
                     <Row
                         setQuestionModal={setQuestionModal}
                         setQuestion={setQuestion}
+                        addStats={addStats}
                         key={topic.id}
                         topic={topic}
                     />
                 ))}
+                <Button
+                    variant="contained"
+                    type="submit"
+                    fullWidth
+                    onClick={addStats}
+                >
+                    Завершить игру
+                </Button>
             </div>
         </>
     );
