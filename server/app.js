@@ -16,7 +16,6 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
-
 const GamePage = require('./src/routes/GamePage.Routes');
 const AuthRoutes = require('./src/routes/auth.Routes');
 
@@ -25,7 +24,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public/')));
 app.use(
   cors({
-    origin: 'http://localhost:3000',
+    origin: 'http://localhost:4000',
     credentials: true,
   })
 );
