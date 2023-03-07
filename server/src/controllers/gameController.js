@@ -58,8 +58,9 @@ exports.GameMain = async (req, res) => {   // адская ручка, где п
             return _.sampleSize(selectedQuestions, 4);
         });
 
-
+        console.log("-> randomQuestions", randomQuestions);
         res.json(randomQuestions);
+
     } catch (e) {
         console.error(e);
     }
@@ -80,8 +81,8 @@ exports.NewGame = async (req, res, next) => {  // создаем новую иг
 
 exports.Personal = async (req, res, next) => { // личный кабинет
     // // в итоге получаем массив со статой по всем игрокам в виде [
-    //     //    [ { username: 'John Doe', gamesPlayed: 1, totalPoints: 6600 },
-    //     //     { username: 'Ilya', gamesPlayed: 0, totalPoints: 0 } ]
+    //     //    [ { username: 'John Doe', gamesPlayed: 1, totalPoints: 6600, games: {'1': 2000, '2': 1200} } },
+    //     //     { username: 'Ilya', gamesPlayed: 0, totalPoints: 0, games: {'1': 2000, '2': 1000} } ]
     try {
         const {userId} = req.params
 
@@ -114,30 +115,36 @@ exports.Personal = async (req, res, next) => { // личный кабинет
                 stats[userId] = {
                     username: user.login,
                     gamesPlayed: 0,
-                    totalPoints: 0
+                    totalPoints: 0,
+                    games: {}
                 };
 
-                const gamesPlayed = [];
+                const gameCounter = {};
 
                 user.Scores.forEach(score => {
                     const gameId = score.gameId;
                     const points = score.Question.points;
+                    const gameIndex = gameCounter[gameId] ? gameCounter[gameId] : Object.keys(gameCounter).length + 1;
+                    gameCounter[gameId] = gameIndex;
 
-                    if (!gamesPlayed.includes(gameId)) {
-                        stats[userId].gamesPlayed++;
-                        gamesPlayed.push(gameId);
+                    if (!stats[userId].games[gameIndex]) {
+                        stats[userId].games[gameIndex] = 0
                     }
 
                     if (score.correctQuestion) {
+                        stats[userId].games[gameIndex] += points;
                         stats[userId].totalPoints += points;
                     }
                 });
-            });
 
+                stats[userId].gamesPlayed = Object.keys(gameCounter).length;
+            });
 
             return Object.values(stats);
         };
+
         const result = await getUsersStats()
+
 
 
         res.json(result)
@@ -148,5 +155,19 @@ exports.Personal = async (req, res, next) => { // личный кабинет
     }
 }
 
+
+
+
+exports.ResultGame = async (req, res, next) => {  // нужен массив с отвеченными вопросами для записи в Scores
+    try {
+        const {someArray} = req.body
+        someArray.forEach(async (el) => await Score.create(el))
+
+
+        res.status(200).end()
+    } catch (e) {
+        console.error(e)
+    }
+}
 
 
