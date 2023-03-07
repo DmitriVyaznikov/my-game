@@ -11,8 +11,21 @@ import { Personal } from './Personal/Personal';
 
 function App() {
   const [questionModal, setQuestionModal] = useState(false);
-  const [question, setQuestion] = useState({});
-  console.log('-> question', question);
+  const [question, setQuestion] = useState({})
+
+
+    const addStats = async (e, answer) => {
+      if (e.target) {
+          const data = await fetch('/game/result', {
+              method: "POST",
+              headers: {"Content-Type": "application/json"},
+              body: JSON.stringify(answer),
+              credentials: "include",
+          })
+      }
+
+    }
+
 
   return (
     <>
@@ -34,12 +47,7 @@ function App() {
         {/* <Route path="/game" element={<div>Game with Start button</div>}></Route> */}
         <Route
           path="/game"
-          element={
-            <GameMain
-              setQuestionModal={setQuestionModal}
-              setQuestion={setQuestion}
-            />
-          }
+          element={<GameMain setQuestionModal={setQuestionModal} setQuestion={setQuestion} addStats={addStats}/>}
         ></Route>
         <Route
           path="/game/:id"
