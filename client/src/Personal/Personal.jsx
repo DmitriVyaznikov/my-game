@@ -16,7 +16,7 @@ export function Personal() {
     const result = await response.json();
 
     console.log(result, "result from back++++++++++++") 
-    dispatch(setTopics(result));
+    // dispatch(setTopics(result));
   };
 
   useEffect(() => {
@@ -27,9 +27,10 @@ export function Personal() {
   return (
     <>
       <div>
-        {games.map((game) => (
+        {/* {games.map((game) => (
           <PersonalRow key={game.id} game={game} />
-        ))}
+        ))} */}
+        
       </div>
     </>
   );
