@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import style from './style.module.css';
 
 export const Timer = () => {
-  const [timer, setTimer] = useState(15);
+  const [timer, setTimer] = useState(30);
 
   useEffect(() => {
     let counter;
