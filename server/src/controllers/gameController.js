@@ -150,7 +150,6 @@ exports.Personal = async (req, res, next) => { // личный кабинет
         const result = await getUsersStats()
 
 
-
         res.json(result)
 
 
@@ -160,8 +159,6 @@ exports.Personal = async (req, res, next) => { // личный кабинет
 }
 
 
-
-
 exports.ResultGame = async (req, res, next) => {  // нужен массив с отвеченными вопросами для записи в Scores
     try {
         const {someArray} = req.body
@@ -169,6 +166,19 @@ exports.ResultGame = async (req, res, next) => {  // нужен массив с 
 
 
         res.status(200).end()
+    } catch (e) {
+        console.error(e)
+    }
+}
+
+exports.QuestionOne = async (req, res, next) => {  // нужен массив с отвеченными вопросами для записи в Scores
+    try {
+        const {questionId} = req.params
+        console.log("-> req.params", req.params);
+        const question = await Question.findOne({where: {id: questionId}, raw: true, nest: true})
+
+
+        res.json(question)
     } catch (e) {
         console.error(e)
     }
