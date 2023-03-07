@@ -14,16 +14,14 @@ const ModalWin = ({
   setQuestionModal,
 }) => {
   const onClose = (event) => {
-    if (event.target) setSignUpModal(false);
-    if (event.target) setSignInModal(false);
-    if (event.target) setQuestionModal(false);
+    if (event.target && setSignUpModal) setSignUpModal(false);
+    if (event.target && setSignInModal) setSignInModal(false);
+    if (event.target && setQuestionModal) setQuestionModal(false);
   };
-
-  console.log(questionModal);
 
   return (
     <Modal
-      open={signUpModal || signInModal || questionModal} //isOpen
+      open={signUpModal || signInModal || questionModal || false} //isOpen
       onClose={onClose}
       aria-labelledby="login-modal-title"
       aria-describedby="login-modal-description"
@@ -45,7 +43,7 @@ const ModalWin = ({
       >
         {signInModal && <Login setSignInModal={setSignInModal} />}
         {signUpModal && <Register setSignUpModal={setSignUpModal} />}
-        {questionModal && <Question setQuestionModal={setQuestionModal} />}
+        {questionModal && <Question />}
       </Box>
     </Modal>
   );
