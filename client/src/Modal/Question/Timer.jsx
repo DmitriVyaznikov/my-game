@@ -3,7 +3,6 @@ import style from './module.style.css';
 
 export const Timer = () => {
   const [timer, setTimer] = useState(15);
-  console.log(timer);
 
   useEffect(() => {
     let counter;
@@ -12,6 +11,9 @@ export const Timer = () => {
         setTimer(timer - 1);
       }, 1000);
     }
+    // if (timer === 0) {
+    //   const response =
+    // }
     return () => clearInterval(counter);
   }, [timer]);
 

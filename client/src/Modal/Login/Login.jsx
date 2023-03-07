@@ -34,6 +34,7 @@ function Login({ setSignInModal }) {
           JSON.stringify({ login: result.reqUser.name, id: result.reqUser.id })
         );
 
+
         dispatch(
           setUserInfo({
             userId: result.reqUser.id,

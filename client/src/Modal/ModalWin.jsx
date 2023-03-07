@@ -19,6 +19,8 @@ const ModalWin = ({
     if (event.target) setQuestionModal(false);
   };
 
+  console.log(questionModal);
+
   return (
     <Modal
       open={signUpModal || signInModal || questionModal} //isOpen

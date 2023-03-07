@@ -1,12 +1,13 @@
-import { light } from "@mui/material/styles/createPalette";
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { Row } from "../Row/Row";
-import { setTopics } from "../store/actions";
-import styles from "./gameMain.module.css";
+import { light } from '@mui/material/styles/createPalette';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { Row } from '../Row/Row';
+import { setTopics } from '../store/actions';
+import { mappedQuestions } from '../Utils/topics';
+import styles from './gameMain.module.css';
 
-export function GameMain() {
+export function GameMain({ setQuestionModal }) {
   const topics = useSelector((store) => store.topics);
   const user = useSelector((store) => store.user);
 
@@ -15,13 +16,15 @@ export function GameMain() {
   const navigate = useNavigate();
 
   const getTopics = async (user) => {
-    const response = await fetch(
-      `http://localhost:4004/${user.userId}/attempt/${user.gameId}`
-    );
+    const response = await fetch(`/game/${user.userId}/attempt/${user.gameId}`);
 
     const result = await response.json();
 
-    dispatch(setTopics(result));
+    const mappedTopics = mappedQuestions(result);
+
+    // console.log(mappedTopics, '======================');
+
+    dispatch(setTopics(mappedTopics));
   };
 
   useEffect(() => {
@@ -29,14 +32,18 @@ export function GameMain() {
   }, []);
 
   if (!user.gameId) {
-    navigate("/");
+    navigate('/');
   }
 
   return (
     <>
       <div className={styles.mainBox}>
         {topics.map((topic) => (
-          <Row key={topic.id} topic={topic} />
+          <Row
+            setQuestionModal={setQuestionModal}
+            key={topic.id}
+            topic={topic}
+          />
         ))}
       </div>
     </>

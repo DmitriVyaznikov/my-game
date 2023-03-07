@@ -13,7 +13,7 @@ exports.GameBeforeStart = async (req, res) => {  // получаем инфу п
         const userLastGame = await Game.findAll({where: {userId}, order: [["createdAt", "DESC"]], limit: 1})
 
         const newGame = await Game.create({userId});
-        
+
         res.json({newGame, userLastGame});
     } catch (e) {
         console.error(e);
@@ -57,8 +57,13 @@ exports.GameMain = async (req, res) => {   // адская ручка, где п
             return _.sampleSize(selectedQuestions, 4);
         });
 
-        console.log("-> randomQuestions", randomQuestions);
-        res.json(randomQuestions);
+        const sortedQuestions = randomQuestions.map((subarray) =>
+            subarray.sort((a, b) => a.points - b.points)
+        );
+
+
+        // console.log("-> randomQuestions", sortedQuestions);
+        res.json(sortedQuestions);
 
     } catch (e) {
         console.error(e);
