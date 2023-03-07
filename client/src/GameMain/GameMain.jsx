@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Row } from "../Row/Row";
 import { setTopics } from "../store/actions";
+import { mappedQuestions } from "../Utils/topics";
 import styles from "./gameMain.module.css";
 
 export function GameMain() {
@@ -16,12 +17,16 @@ export function GameMain() {
 
   const getTopics = async (user) => {
     const response = await fetch(
-      `http://localhost:4004/${user.userId}/attempt/${user.gameId}`
+      `http://localhost:4000/game/${user.userId}/attempt/${user.gameId}`
     );
 
     const result = await response.json();
 
-    dispatch(setTopics(result));
+    const mappedTopics = mappedQuestions(result);
+
+    // console.log(mappedTopics, '======================');
+
+    dispatch(setTopics(mappedTopics));
   };
 
   useEffect(() => {
