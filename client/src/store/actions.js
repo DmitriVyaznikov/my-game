@@ -1,4 +1,4 @@
-import ATypes from './types';
+import ATypes from "./types";
 
 export const setTopics = (topics) => ({
   type: ATypes.SET_TOPICS,
@@ -10,14 +10,9 @@ export const setUserInfo = (user) => ({
   payload: { user: user },
 });
 
-export const setAnswers = (userId, gameId, correctQuestion, questionId) => ({
+export const setAnswers = (answer) => ({
   type: ATypes.SET_ANSWERS,
-  payload: {
-    userId: userId,
-    gameId: gameId,
-    correctQuestion: correctQuestion,
-    questionId: questionId,
-  },
+  payload: answer,
 });
 
 export const setGames = (games) => ({
