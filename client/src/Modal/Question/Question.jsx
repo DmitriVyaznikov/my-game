@@ -4,12 +4,12 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Timer } from './Timer';
 
-export const Question = ({ setQuestionModal }) => {
+export const Question = () => {
   const [answer, setAnswer] = useState('');
   const onChangeHandle = (event) => {
-    setAnswer({ ...answer, ...event.target.value });
+    setAnswer({ ...answer, [event.target.name]: event.target.value });
   };
-
+  console.log(answer);
   return (
     <>
       <Typography
@@ -32,12 +32,11 @@ export const Question = ({ setQuestionModal }) => {
         <TextField
           onChange={onChangeHandle}
           id="answerField"
-          label="Ответ на вопрос"
+          label="Ответ на вопрос:"
           variant="outlined"
           margin="normal"
           name="answer"
           fullWidth
-          required
         />
         <div>
           {' '}
