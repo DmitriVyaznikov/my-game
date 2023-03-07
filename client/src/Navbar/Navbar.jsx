@@ -1,121 +1,125 @@
-import React, { useEffect, useState } from 'react';
-import { AppBar, Toolbar, Typography, Button } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import React, {useEffect, useState} from 'react';
+import {AppBar, Toolbar, Typography, Button} from '@mui/material';
+import {styled} from '@mui/material/styles';
 import ModalWin from '../Modal/ModalWin';
-import { Link, useNavigate } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
+import {useSelector} from 'react-redux';
 
 const CustomNavbar = styled(AppBar)({
-  backgroundColor: '#2196f3', // your custom background color
+    backgroundColor: '#2196f3', // your custom background color
 });
 
 const CustomButton = styled(Button)({
-  color: 'white', // your custom text color
+    color: 'white', // your custom text color
 });
 
 const Navbar = (props) => {
-  const navigate = useNavigate();
+    const userName = useSelector((store) => store.user.username);
 
-  const [signUpModal, setSignUpModal] = useState(false);
-  const [signInModal, setSignInModal] = useState(false);
-  const [questionModal, setQuestionModal] = useState(true);
+    const navigate = useNavigate();
 
-  const handleModal = (event) => {
-    if (event.target.id === 'signin') setSignInModal(true);
-    if (event.target.id === 'signup') setSignUpModal(true);
-  };
+    const [signUpModal, setSignUpModal] = useState(false);
+    const [signInModal, setSignInModal] = useState(false);
+    const [questionModal, setQuestionModal] = useState(true);
 
-  const [isAuth, setIsAuth] = useState(false);
+    const handleModal = (event) => {
+        if (event.target.id === 'signin') setSignInModal(true);
+        if (event.target.id === 'signup') setSignUpModal(true);
+    };
 
-  const userName = JSON.parse(localStorage.getItem('user'));
-  useEffect(() => {
-    setIsAuth(!!userName);
-  }, [userName]);
+    const [isAuth, setIsAuth] = useState(false);
 
-  const onLogout = async () => {
-    try {
-      const response = await fetch('http://localhost:4000/auth/signout', {
-        credentials: 'include',
-      });
-      const result = await response.json();
-      console.log(result);
-      localStorage.clear();
-      setIsAuth(false);
-      console.log('HEADER', isAuth);
-      navigate('/');
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    useEffect(() => {
+        setIsAuth(!!userName);
+    }, [userName]);
 
-  return (
-    <>
-      <CustomNavbar position="static">
-        <Toolbar>
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1 }}
-          >
-            Своя игра
-          </Typography>
-          {isAuth ? (
-            <>
-              <CustomButton
-                id="home"
-                onClick={() => {
-                  navigate('/');
-                }}
-                color="inherit"
-              >
-                Home
-              </CustomButton>
-              <CustomButton
-                id="profile"
-                onClick={() => {
-                  navigate('/profile');
-                }}
-                color="inherit"
-              >
-                Hello, {userName.login}
-              </CustomButton>
-              <CustomButton
-                id="logout"
-                onClick={onLogout}
-                color="inherit"
-              >
-                Выйти
-              </CustomButton>
-            </>
-          ) : (
-            <>
-              <CustomButton
-                id="signin"
-                onClick={handleModal}
-                color="inherit"
-              >
-                Вход
-              </CustomButton>
-              <CustomButton
-                id="signup"
-                onClick={handleModal}
-                color="inherit"
-              >
-                Регистрация
-              </CustomButton>
-            </>
-          )}
-        </Toolbar>
-      </CustomNavbar>
-      <ModalWin
-        signUpModal={signUpModal}
-        signInModal={signInModal}
-        questionModal={questionModal}
-        setSignUpModal={setSignUpModal}
-        setSignInModal={setSignInModal}
-        setQuestionModal={setQuestionModal}
-      />
-    </>
-  );
+    const onLogout = async () => {
+        try {
+            const response = await fetch('http://localhost:4000/auth/signout', {
+                credentials: 'include',
+            });
+            const result = await response.json();
+            console.log(result);
+            localStorage.clear();
+            setIsAuth(false);
+            console.log('HEADER', isAuth);
+            navigate('/');
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    return (
+        <>
+            <CustomNavbar position="static">
+                <Toolbar>
+                    <Typography
+                        variant="h6"
+                        component="div"
+                        sx={{flexGrow: 1}}
+                    >
+                        Своя игра
+                    </Typography>
+                    {isAuth ? (
+                        <>
+                            <CustomButton sx={{flexGrow: 2}} color="inherit">Hello, {userName}</CustomButton>
+                            <CustomButton
+                                id="home"
+                                onClick={() => {
+                                    navigate('/');
+                                }}
+                                color="inherit"
+                            >
+                                Home
+                            </CustomButton>
+
+                            <CustomButton
+                                id="profile"
+                                onClick={() => {
+                                    navigate('/personal');
+                                }}
+                                color="inherit"
+                            >
+                                Profile
+                            </CustomButton>
+                            <CustomButton
+                                id="logout"
+                                onClick={onLogout}
+                                color="inherit"
+                            >
+                                Выйти
+                            </CustomButton>
+                        </>
+                    ) : (
+                        <>
+                            <CustomButton
+                                id="signin"
+                                onClick={handleModal}
+                                color="inherit"
+                            >
+                                Вход
+                            </CustomButton>
+                            <CustomButton
+                                id="signup"
+                                onClick={handleModal}
+                                color="inherit"
+                            >
+                                Регистрация
+                            </CustomButton>
+                        </>
+                    )}
+                </Toolbar>
+            </CustomNavbar>
+            <ModalWin
+                signUpModal={signUpModal}
+                signInModal={signInModal}
+                questionModal={questionModal}
+                setSignUpModal={setSignUpModal}
+                setSignInModal={setSignInModal}
+                setQuestionModal={setQuestionModal}
+            />
+        </>
+    );
 };
 
 export default Navbar;

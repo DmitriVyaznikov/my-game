@@ -16,7 +16,7 @@ const ModalWin = ({
   const onClose = (event) => {
     if (event.target) setSignUpModal(false);
     if (event.target) setSignInModal(false);
-    if (event.target) setQuestionModal(true);
+    if (event.target) setQuestionModal(false);
   };
 
   return (
