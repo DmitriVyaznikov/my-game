@@ -10,11 +10,10 @@ exports.GameBeforeStart = async (req, res) => {  // получаем инфу п
         const username = req.session?.user?.name;
         const {userId} = req.params;
 
-        const newGame = await Game.create({userId});
-
         const userLastGame = await Game.findAll({where: {userId}, order: [["createdAt", "DESC"]], limit: 1})
 
-
+        const newGame = await Game.create({userId});
+        
         res.json({newGame, userLastGame});
     } catch (e) {
         console.error(e);
