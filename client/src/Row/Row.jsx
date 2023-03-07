@@ -8,7 +8,7 @@ export function Row(props) {
   const { setQuestionModal } = props;
 
   const handleModal = (event) => {
-    if (event.target.id) setQuestionModal(true);
+    if (event.target) setQuestionModal(true);
   };
 
   return (
@@ -16,11 +16,11 @@ export function Row(props) {
       <Box className={styles.themename}>{topic.name}</Box>
 
       {topic.questions.map((el) => (
-        <Button onClick={handleModal}>
-          <Box
-            className={styles.questionsrow}
-            key={el.id}
-          >
+        <Button
+          key={el.id}
+          onClick={handleModal}
+        >
+          <Box className={styles.questionsrow}>
             {!el.answered ? el.points : 'Answered'}
           </Box>
         </Button>
