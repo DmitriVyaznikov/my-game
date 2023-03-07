@@ -3,6 +3,8 @@ import { Typography } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Timer } from './Timer';
+import styled from '@emotion/styled';
+import style from './style.module.css';
 
 export const Question = () => {
   const [answer, setAnswer] = useState('');
@@ -43,6 +45,7 @@ export const Question = () => {
           <Timer />
         </div>
         <Button
+          className={style.answerButton}
           variant="contained"
           type="submit"
           fullWidth
