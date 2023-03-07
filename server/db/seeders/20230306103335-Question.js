@@ -172,7 +172,7 @@ module.exports = {
         {
           questionText: 'Давай по-новой, Миша...',
           points: 200,
-          answer: 'все *****',
+          answer: 'все х**ня',
           theme_id: 4,
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -189,7 +189,7 @@ module.exports = {
         {
           questionText: 'Вы кто такие? Я вас не звал!...',
           points: 600,
-          answer: 'Идите *****',
+          answer: 'Идите на**й',
           theme_id: 4,
           createdAt: new Date(),
           updatedAt: new Date(),
