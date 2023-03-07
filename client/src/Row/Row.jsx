@@ -10,6 +10,7 @@ export function Row(props) {
     const handleModal = async (event) => {
         if (event.target) setQuestionModal(true);
         const response = await fetch(`/game/question/${event.target.id}`)
+        console.log("-> response", response);
         const readyQuestion = await response.json()
         props.setQuestion(readyQuestion)
     };

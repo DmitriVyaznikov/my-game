@@ -25,7 +25,7 @@ const Navbar = (props) => {
 
     const [signUpModal, setSignUpModal] = useState(false);
     const [signInModal, setSignInModal] = useState(false);
-    const [questionModal, setQuestionModal] = useState(true);
+    const [questionModal, setQuestionModal] = useState(false);
 
   const handleModal = (event) => {
     if (event.target.id === 'signin') setSignInModal(true);

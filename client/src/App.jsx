@@ -11,8 +11,9 @@ import { setUserInfo } from './store/actions';
 function App() {
   const [questionModal, setQuestionModal] = useState(false);
   const [question, setQuestion] = useState({})
+    console.log("-> question", question);
 
-    let onequestion = question
+
 
 
   return (
@@ -35,7 +36,7 @@ function App() {
         {/* <Route path="/game" element={<div>Game with Start button</div>}></Route> */}
         <Route
           path="/game"
-          element={<GameMain setQuestionModal={setQuestionModal} />}
+          element={<GameMain setQuestionModal={setQuestionModal} setQuestion={setQuestion}/>}
         ></Route>
         <Route
           path="/game/:id"
