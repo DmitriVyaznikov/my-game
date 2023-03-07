@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Timer } from './Timer';
 
-export const Question = ({ setQuestionModal }) => {
+export const Question = () => {
   const [answer, setAnswer] = useState('');
   const onChangeHandle = (event) => {
     setAnswer({ ...answer, [event.target.name]: event.target.value });

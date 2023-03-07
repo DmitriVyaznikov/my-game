@@ -4,9 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Row } from '../Row/Row';
 import { setTopics } from '../store/actions';
+import { mappedQuestions } from '../Utils/topics';
 import styles from './gameMain.module.css';
 
-export function GameMain() {
+export function GameMain({ setQuestionModal }) {
   const topics = useSelector((store) => store.topics);
   const user = useSelector((store) => store.user);
 
@@ -39,6 +40,7 @@ export function GameMain() {
       <div className={styles.mainBox}>
         {topics.map((topic) => (
           <Row
+            setQuestionModal={setQuestionModal}
             key={topic.id}
             topic={topic}
           />
