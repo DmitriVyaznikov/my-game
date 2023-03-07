@@ -1,48 +1,49 @@
-import React from "react";
-import { Typography } from "@mui/material";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setUserInfo } from "../../store/actions";
+import React from 'react';
+import { Typography } from '@mui/material';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setUserInfo } from '../../store/actions';
 
 function Register({ setSignUpModal }) {
   const [user, setUser] = useState({});
   const navigate = useNavigate();
+  console.log('Дефолтный стейт', user);
 
   const dispatch = useDispatch();
 
   const onChangeHandle = (event) => {
     setUser({ ...user, [event.target.name]: event.target.value });
   };
+  console.log('Измененный стейт', user);
 
   const signUp = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch("/auth/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const response = await fetch('/auth/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(user),
-        credentials: "include",
+        credentials: 'include',
       });
       const result = await response.json();
-      console.log(result);
+      console.log('==============>', result);
       if (result.status === 200) {
         localStorage.setItem(
-          "user",
+          'user',
           JSON.stringify({ login: result.user.login, id: result.user.id })
         );
-
         dispatch(
           setUserInfo({
             userId: result.user.id,
-            username: result.user.name,
+            username: result.user.login,
           })
         );
 
         setSignUpModal(false);
-        navigate("/");
+        navigate('/');
       }
     } catch (error) {
       console.error(error);
@@ -51,10 +52,18 @@ function Register({ setSignUpModal }) {
 
   return (
     <>
-      <Typography variant="h6" id="login-modal-title" gutterBottom>
+      <Typography
+        variant="h6"
+        id="login-modal-title"
+        gutterBottom
+      >
         Регистрация
       </Typography>
-      <Typography variant="body1" id="login-modal-description" gutterBottom>
+      <Typography
+        variant="body1"
+        id="login-modal-description"
+        gutterBottom
+      >
         Заполните все поля
       </Typography>
       <form onSubmit={signUp}>
@@ -90,7 +99,11 @@ function Register({ setSignUpModal }) {
           fullWidth
           required
         />
-        <Button variant="contained" type="submit" fullWidth>
+        <Button
+          variant="contained"
+          type="submit"
+          fullWidth
+        >
           Зарегистрироваться
         </Button>
       </form>
