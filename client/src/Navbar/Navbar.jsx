@@ -4,7 +4,9 @@ import { styled } from '@mui/material/styles';
 import ModalWin from '../Modal/ModalWin';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import style from './style.module.css';
+import { logout } from '../store/actions';
 
 const CustomNavbar = styled(AppBar)({
   backgroundColor: '#2196f3', // your custom background color
@@ -16,8 +18,10 @@ const CustomButton = styled(Button)({
 
 const Navbar = (props) => {
   const userName = useSelector((store) => store.user.username);
+  console.log('State UserName', userName);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [signUpModal, setSignUpModal] = useState(false);
   const [signInModal, setSignInModal] = useState(false);
@@ -28,10 +32,14 @@ const Navbar = (props) => {
   };
 
   const [isAuth, setIsAuth] = useState(false);
+  console.log('FalseIsAuth', isAuth);
 
   useEffect(() => {
     setIsAuth(!!userName);
+    console.log('State UserName', userName);
   }, [userName]);
+
+  console.log('ChangedIsAuth', isAuth);
 
   const onLogout = async () => {
     try {
@@ -39,8 +47,7 @@ const Navbar = (props) => {
         credentials: 'include',
       });
       const result = await response.json();
-      console.log(result);
-      localStorage.clear();
+      dispatch(logout());
       setIsAuth(false);
       console.log('HEADER', isAuth);
       navigate('/');

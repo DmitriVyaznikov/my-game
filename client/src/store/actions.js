@@ -1,4 +1,4 @@
-import ATypes from "./types";
+import ATypes from './types';
 
 export const setTopics = (topics) => ({
   type: ATypes.SET_TOPICS,
@@ -23,4 +23,8 @@ export const setAnswers = (userId, gameId, correctQuestion, questionId) => ({
 export const setGames = (games) => ({
   type: ATypes.SET_GAMES,
   payload: { games: games },
+});
+
+export const logout = () => ({
+  type: ATypes.LOGOUT,
 });
