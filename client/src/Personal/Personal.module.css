@@ -1,0 +1,7 @@
+.mainBox {
+    padding: 50px 124px;
+    /* display: flex; */
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+  }

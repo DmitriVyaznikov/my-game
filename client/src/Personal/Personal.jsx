@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { PersonalRow } from "../PersonalRow/PersonalRow";
 import { setGames } from "../store/actions";
+import styles from "./Personal.module.css";
 
 export function Personal() {
   const games = useSelector((store) => store.games);
@@ -26,9 +27,9 @@ export function Personal() {
 
   return (
     <>
-      <div>
-        {games.map((game) => (
-          <PersonalRow  game={game} />
+      <div className={styles.mainBox}>
+        {games.map((game, index) => (
+          <PersonalRow key={index} game={game} />
         ))}
       </div>
     </>
