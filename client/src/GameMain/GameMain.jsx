@@ -19,7 +19,11 @@ export function GameMain() {
 
     const result = await response.json();
 
-    dispatch(setTopics(result));
+    const mappedTopics = mappedQuestions(result);
+
+    // console.log(mappedTopics, '======================');
+
+    dispatch(setTopics(mappedTopics));
   };
 
   useEffect(() => {
